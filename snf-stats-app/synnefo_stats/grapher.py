@@ -96,8 +96,10 @@ def draw_cpu_bar(fname, outfname=None):
 
 def draw_net_bar(fname, outfname=None):
     dname = os.path.join(fname, "interface")
-    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
+    if not os.path.isdir(dname):
+        raise faults.ItemNotFound("VM has no attached NICs")
 
+    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
     if not fnames:
         raise faults.ItemNotFound("VM has no attached NICs")
 
@@ -186,8 +188,10 @@ def draw_net_ts(fname, outfname):
     outfname += "-net.png"
 
     dname = os.path.join(fname, "interface")
-    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
+    if not os.path.isdir(dname):
+        raise faults.ItemNotFound("VM has no attached NICs")
 
+    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
     if not fnames:
         raise faults.ItemNotFound("VM has no attached NICs")
 
@@ -223,8 +227,10 @@ def draw_net_ts_w(fname, outfname):
     outfname += "-net-weekly.png"
 
     dname = os.path.join(fname, "interface")
-    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
+    if not os.path.isdir(dname):
+        raise faults.ItemNotFound("VM has no attached NICs")
 
+    fnames = [os.path.join(dname, rrdfile) for rrdfile in os.listdir(dname)]
     if not fnames:
         raise faults.ItemNotFound("VM has no attached NICs")
 
